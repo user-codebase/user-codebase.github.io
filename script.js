@@ -91,15 +91,13 @@ $(document).ready(function() {
       method: 'POST',
       processData: false,
       contentType: "application/json; charset=utf-8",
-      dataType: 'json',
+      // dataType: 'json',
       data: JSON.stringify({
         title: taskTitle,
         content: taskContent
       }),
-      complete: function(data) {
-        if(data.status === 200) {
-          getAllTasks();
-        }
+      success: function() {
+        getAllTasks();
       }
     });
   }
