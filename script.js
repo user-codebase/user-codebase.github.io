@@ -48,19 +48,14 @@ $(document).ready(function() {
     $.ajax({
       url: requestUrl,
       method: "PUT",
-      // processData: false,
-      // contentType: "application/json; charset=utf-8",
-      // dataType: 'json',
-      // data: JSON.stringify({
-      //   id: taskId,
-      //   title: taskTitle,
-      //   content: taskContent
-      // }),
-      data: {
+      processData: false,
+      contentType: "application/json; charset=utf-8",
+      dataType: 'json',
+      data: JSON.stringify({
         id: taskId,
         title: taskTitle,
         content: taskContent
-      },
+      }),
       success: function(data) {
         parentEl.attr('data-task-id', data.id).toggleClass('datatable__row--editing');
         parentEl.find('[data-task-name-paragraph]').text(taskTitle);
@@ -94,20 +89,18 @@ $(document).ready(function() {
     $.ajax({
       url: requestUrl,
       method: 'POST',
-      // processData: false,
-      // contentType: "application/json; charset=utf-8",
-      // dataType: 'json',
-      // data: JSON.stringify({
-      //   title: taskTitle,
-      //   content: taskContent
-      // }),
-      data: {
+      processData: false,
+      contentType: "application/json; charset=utf-8",
+      dataType: 'json',
+      data: JSON.stringify({
         title: taskTitle,
         content: taskContent
-      },
-      success: function() {
+      }),
+      complete: function(data) {
+        if(data.status === 200) {
           getAllTasks();
-     }
+        }
+      }
     });
   }
 
